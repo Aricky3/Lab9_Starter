@@ -64,44 +64,169 @@
         <input name="second-num" id="second-num" />
         <button id="calculate">Calculate</button>
         <br />
-        <output></output>
+        <output id="result"></output>
       </fieldset>
     </form>
 
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button id="consoleLog">Console Log</button>
+      <button id="consoleEr">Console Error</button>
+      <button id="CC">Console Count</button>
+      <button id="CW">Console Warn</button>
+      <button id="CA">Console Assert</button>
+      <button id="ConsoleCl">Console Clear</button>
+      <button id="consoleDir">Console Dir</button>
+      <button id="dxl">Console dirxml</button>
+      <button id="cgs">Console Group Start</button>
+      <button id="cge">Console Group End</button>
+      <button id="consoleTable">Console Table</button>
+      <button id="st">Start Timer</button>
+      <button id="et">End Timer</button>
+      <button id="Ctrace">Console Trace</button>
+      <button id="tge">Trigger a Global Error</button>
     </section>
   </main>
-
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "11fed3ea8e054b9a96c7e4adbbea04c4"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                          
+  <script>
+
+
+    class unkown extends Error {
+      constructor(obj) {
+        super('Input is null -> ' + obj);
+        this.name = "Validation Error";
+        this.obj = obj;
+      }
+    }
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
-      e.preventDefault();
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try {
+        console.log("hey im in try block");
+        e.preventDefault();
+        let firstNum = document.querySelector('#first-num').value;
+        let secondNum = document.querySelector('#second-num').value;
+        let operator = document.querySelector('#operator').value;
+        let output = document.querySelector('output');
+        //output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+        console.log('before if');
+        if (firstNum == 'null') {
+          console.log('first if');
+          throw new unkown('firstNum')
+        }
+        if(secondNum == 'null'){
+          console.log('second if');
+          throw new unkown('secondNum')
+        }
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+        
+      } catch (err) {
+        console.log("yo im in catch block");
+        if(err instanceof unkown){
+          console.log("hey this works and ->" + err.message);
+          console.error(err);
+        }
+        throw err
+        
+      } finally{
+        console.log('arrived at final calulation')
+      }
+      //e.preventDefault();
+      // let output = document.querySelector('output');
+      // let firstNum = document.querySelector('#first-num').value;
+      // let secondNum = document.querySelector('#second-num').value;
+      // let operator = document.querySelector('#operator').value;
+      // output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
     });
-
+    dawg();
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
-
+    let firstNum = document.querySelector('#first-num').value;
+    let secondNum = document.querySelector('#second-num').value;
+    let operator = document.querySelector('#operator').value;
+    let logC = document.getElementById("result");
+    let btnCL = document.getElementById("consoleLog");
+    let btnCE = document.getElementById('consoleEr');
+    let ConTable = document.getElementById("consoleTable");
+    let conCount = document.getElementById("CC");
+    let consoleW = document.getElementById("CW");
+    let consoleAlert = document.getElementById("CA");
+    let consoleClear = document.getElementById("ConsoleCl");
+    let consoleDir = document.getElementById("consoleDir");
+    let consoleDxl = document.getElementById("dxl");
+    let congs = document.getElementById("cgs");
+    let conge = document.getElementById("cge");
+    let stim = document.getElementById("st");
+    let etim = document.getElementById("et");
+    let conTrace = document.getElementById("Ctrace");
+    let trig = document.getElementById("tge");
+    let arr1 = [operator, logC.value];
+    btnCL.addEventListener('click', () => {
+      console.log(logC.value);
+    });
+    btnCE.addEventListener('click', () => {
+      console.error("there was an error check code");
+    });
+    ConTable.addEventListener('click', () => {
+      console.table(arr1);
+    });
+    conCount.addEventListener('click', () => {
+      for (let i = 0; i < logC.value; i++) {
+        console.count(logC.value);
+      }
+    });
+    consoleW.addEventListener('click', () => {
+      console.warn("check Operator, current opperator is: " + String(operator));
+    });
+    consoleAlert.addEventListener('click', () => {
+      console.assert(firstNum + secondNum == 69, "Your result was not 69")
+    });
+    consoleClear.addEventListener('click', () => {
+      console.clear();
+    });
+    consoleDir.addEventListener('click', () => {
+      console.dir(consoleDir);
+    });
+    consoleDxl.addEventListener('click', () => {
+      console.dirxml(consoleDxl);
+    })
+    congs.addEventListener('click', () => {
+      console.group();
+    });
+    conge.addEventListener('click', () => {
+      console.groupEnd();
+    });
+    stim.addEventListener('click', () => {
+      console.time('Hey this is Time:')
+    });
+    etim.addEventListener('click', () => {
+      console.timeEnd('Hey this is Time:')
+    });
+    conTrace.addEventListener('click', () => {
+      kanye();
+    });
+    function kanye() {
+      ye();
+    }
+    function ye() {
+      tlop();
+    }
+    function tlop() {
+      waves();
+    }
+    function waves() {
+      console.trace();
+    }
+    trig.addEventListener('click', () => {
+      idk();
+    });
     // Start your code here
     // You may move this JS to another file if you wish
+
   </script>
 </body>
 
