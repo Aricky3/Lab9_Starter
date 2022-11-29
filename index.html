@@ -86,14 +86,17 @@
       <button id="tge">Trigger a Global Error</button>
     </section>
   </main>
+
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
-    window.TrackJS && TrackJS.install({ 
+    window.TrackJS && TrackJS.install({
       token: "11fed3ea8e054b9a96c7e4adbbea04c4"
       // for more configuration options, see https://docs.trackjs.com
     });
+    TrackJS.track('Testing TrackJS!');
+                        
   </script>
-                          
+
   <script>
 
 
@@ -119,21 +122,21 @@
           console.log('first if');
           throw new unkown('firstNum')
         }
-        if(secondNum == 'null'){
+        if (secondNum == 'null') {
           console.log('second if');
           throw new unkown('secondNum')
         }
         output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-        
+
       } catch (err) {
         console.log("yo im in catch block");
-        if(err instanceof unkown){
+        if (err instanceof unkown) {
           console.log("hey this works and ->" + err.message);
           console.error(err);
         }
         throw err
-        
-      } finally{
+
+      } finally {
         console.log('arrived at final calulation')
       }
       //e.preventDefault();
@@ -143,7 +146,7 @@
       // let operator = document.querySelector('#operator').value;
       // output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
     });
-    dawg();
+    
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
     let firstNum = document.querySelector('#first-num').value;
     let secondNum = document.querySelector('#second-num').value;
@@ -226,8 +229,9 @@
     });
     // Start your code here
     // You may move this JS to another file if you wish
-
+                        
   </script>
+
 </body>
 
 </html>
